@@ -1,6 +1,6 @@
 /.vscode
-/.exe
-/.layout
-/.o
-/.dev
-/.win
+**.exe
+**.layout
+**.o
+**.dev
+**.win
