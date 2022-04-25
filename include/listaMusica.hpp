@@ -1,5 +1,5 @@
 #include "Musica.hpp"
-
+//estructura del nodo de una lista con sus atributos, punteros y constructor
 struct nodo {
     cancion dato;
     nodo* sig;
@@ -10,7 +10,7 @@ struct nodo {
         ant = NULL;
     }
 };
-
+//clase lista circular doblemente enlazada
 class listaMusica {
     nodo* ptr = NULL;
     nodo* ult = NULL;
