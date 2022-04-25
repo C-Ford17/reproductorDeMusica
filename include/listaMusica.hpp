@@ -21,7 +21,7 @@ public:
     void insertarCancion(cancion x);
     bool listaVacia();
     cancion obtener(int pos);
-    void eliminarCancion(string nombre);
+    void eliminarCancion(int id);
     cancion siguiente(int id);
     cancion anterior(int id);
     void mostrar();

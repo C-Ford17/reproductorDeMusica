@@ -40,39 +40,48 @@ cancion listaMusica::obtener(int pos) {
     }
 }
 
-void listaMusica::eliminarCancion(string nombre) {
+void listaMusica::eliminarCancion(int id) {
     if (!listaVacia()) {
-        if (ptr->dato.nombre == nombre) {
-            nodo* p = ptr;
-            ult->sig = ptr->sig;
-            ptr->sig->ant = ult;
-            ptr = ptr->sig;
-            delete p;
-            cantidad--;
-        }
-        else {
-            if (ult->dato.nombre == nombre) {
-                nodo* p = ult;
-                ult->ant->sig = ptr;
-                ptr->ant = ult->ant;
-                ult = ult->ant;
-                delete p;
+        // if (ptr->dato.id == id) {
+        //     nodo* p = ptr;
+        //     ult->sig = ptr->sig;
+        //     ptr->sig->ant = ult;
+        //     ptr = ptr->sig;
+        //     delete p;
+        //     cantidad--;
+        // }
+        // else if (ult->dato.id == id) {
+        //     nodo* p = ult;
+        //     ult->ant->sig = ptr;
+        //     ptr->ant = ult->ant;
+        //     ult = ult->ant;
+        //     delete p;
+        //     cantidad--;
+        // }
+        // else {
+        nodo* p = ptr;
+        do {
+            if (p->dato.id == id) {
                 cantidad--;
+
+                if (p == p->sig) {
+                    ptr = ult = NULL;
+                    delete p;
+                    return;
+                }
+
+                p->ant->sig = p->sig;
+                p->sig->ant = p->ant;
+
+                if (p == ptr) ptr = ptr->sig;
+                if (p == ult) ult = ult->ant;
+
+                delete p;
+                return;
             }
-            else {
-                nodo* p = ptr;
-                do {
-                    if (p->dato.nombre == nombre) {
-                        p->ant->sig = p->sig;
-                        p->sig->ant = p->ant;
-                        delete p;
-                        cantidad--;
-                        break;
-                    }
-                    p = p->sig;
-                } while (p != ptr);
-            }
-        }
+            p = p->sig;
+        } while (p != ptr);
+        // }
     }
 }
 

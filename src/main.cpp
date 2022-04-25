@@ -10,6 +10,10 @@ int main() {
     chrisplay.insertarCancion(c2);
     chrisplay.insertarCancion(c3);
 
+    chrisplay.eliminarCancion(1);
+    chrisplay.eliminarCancion(3);
+    chrisplay.eliminarCancion(7);
+
     chrisplay.mostrar();
 
     return 1;
