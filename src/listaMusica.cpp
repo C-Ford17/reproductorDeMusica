@@ -1,12 +1,12 @@
 #include "listaMusica.hpp"
-
+//esta funcion enlaza el ultimo y el primer nodo de la lista
 void listaMusica::unirNodos() {
     if (ptr != NULL) {
         ult->sig = ptr;
         ptr->ant = ult;
     }
 }
-
+//esta funcion toma como parametro una cancion y la inserta de ultimo dentro de la lista
 void listaMusica::insertarCancion(cancion x) {
     nodo* nuevo = new nodo(x);
     if (listaVacia())
@@ -19,11 +19,11 @@ void listaMusica::insertarCancion(cancion x) {
     unirNodos();
     cantidad++;
 }
-
+//esta funcion comprueba si la lista esta vacia retornando un booleano
 bool listaMusica::listaVacia() {
     return ptr == NULL;
 }
-
+//esta funcion toma como parametro un entero posicion y retorna la cancion correspondiente a esa posicion
 cancion listaMusica::obtener(int pos) {
     if (!listaVacia()) {
         if (pos < cantidad) {
@@ -39,7 +39,8 @@ cancion listaMusica::obtener(int pos) {
         }
     }
 }
-
+/*esta funcion toma como parametro el id y si coincide
+con alguna cancion de la lista, lo elimina*/
 void listaMusica::eliminarCancion(int id) {
     if (!listaVacia()) {
         // if (ptr->dato.id == id) {
@@ -84,7 +85,7 @@ void listaMusica::eliminarCancion(int id) {
         // }
     }
 }
-
+//esta funcion toma como parametro el id de la cancion y retorna la siguiente
 cancion listaMusica::siguiente(int id) {
     if (!listaVacia()) {
         nodo* p = ptr;
@@ -95,7 +96,7 @@ cancion listaMusica::siguiente(int id) {
         } while (p != ptr);
     }
 }
-
+//esta funcion toma como parametro el id de la cancion y retorna la anterior
 cancion listaMusica::anterior(int id) {
     if (!listaVacia()) {
         nodo* p = ptr;
@@ -106,7 +107,7 @@ cancion listaMusica::anterior(int id) {
         } while (p != ptr);
     }
 }
-
+//esta funcion muestra la lista de canciones
 void listaMusica::mostrar() {
     if (!listaVacia()) {
         nodo* p = ptr;
