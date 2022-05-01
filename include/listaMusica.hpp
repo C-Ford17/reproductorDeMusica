@@ -1,30 +1,30 @@
 #include "Musica.hpp"
-//estructura del nodo de una lista con sus atributos, punteros y constructor
-struct nodo {
-    cancion dato;
-    nodo* sig;
-    nodo* ant;
-    nodo(cancion x) {
-        dato = x;
-        sig = NULL;
-        ant = NULL;
+
+struct nodo{
+    song dato;
+    nodo *next;
+    nodo *prev;
+    nodo(song x){
+        dato=x;
+        next=nullptr;
+        prev=nullptr;
     }
 };
-//clase lista circular doblemente enlazada
-class listaMusica {
-    nodo* ptr = NULL;
-    nodo* ult = NULL;
-    int cantidad = 0;
 
-public:
-    void unirNodos();
-    void insertarCancion(cancion x);
-    bool listaVacia();
-    cancion obtener(int pos);
-    void eliminarCancion(int id);
-    cancion siguiente(int id);
-    cancion anterior(int id);
-    void mostrar();
+class listaMusica{
+    nodo *ini=nullptr;
+    nodo *end=nullptr;
+    int size=0;
+
+    public:
+        void unirNodos();
+        void append(song x);
+        bool isEmpty();
+        song get(int index);
+        void remove(int index);
+        void print();
+        int getSize();
+        nodo * getNode(int index);
 
 };
 
