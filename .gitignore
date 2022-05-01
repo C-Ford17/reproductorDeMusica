@@ -1,1 +1,7 @@
 /.vscode
+**.exe
+**.layout
+**.o
+**.dev
+**.win
+**.sh
