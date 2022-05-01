@@ -1,30 +1,30 @@
 #include "Musica.hpp"
 
 struct nodo{
-    cancion dato;
-    nodo *sig;
-    nodo *ant;
-    nodo(cancion x){
+    song dato;
+    nodo *next;
+    nodo *prev;
+    nodo(song x){
         dato=x;
-        sig=NULL;
-        ant=NULL;
+        next=nullptr;
+        prev=nullptr;
     }
 };
 
 class listaMusica{
-    nodo *ptr=NULL;
-    nodo *ult=NULL;
-    int cantidad=0;
+    nodo *ini=nullptr;
+    nodo *end=nullptr;
+    int size=0;
 
     public:
         void unirNodos();
-        void insertarCancion(cancion x);
-        bool listaVacia();
-        cancion obtener(int pos);
-        void eliminarCancion(string nombre);
-        cancion siguiente(int id);
-        cancion anterior(int id);
-        void mostrar();
+        void append(song x);
+        bool isEmpty();
+        song get(int index);
+        void remove(int index);
+        void print();
+        int getSize();
+        nodo * getNode(int index);
 
 };
 

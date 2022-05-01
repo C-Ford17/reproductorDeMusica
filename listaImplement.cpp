@@ -1,109 +1,93 @@
 #include "listaMusica.hpp"
 
 void listaMusica::unirNodos(){
-    if(ptr!=NULL){
-        ult->sig=ptr;
-        ptr->ant=ult;
-    }
+	if(!isEmpty()){
+        end->next=ini;
+        ini->prev=end;
+	}
 }
 
-void listaMusica::insertarCancion(cancion x){
-    nodo *nuevo = new nodo(x);
-    if(listaVacia())
-        ptr=ult=nuevo;
+int listaMusica::getSize(){
+    return size;
+}
+
+void listaMusica::append(song x){
+    nodo *New = new nodo(x);
+    if(isEmpty())
+        ini=end=New;
     else{
-        ult->sig=nuevo;
-        nuevo->ant=ult;
-        ult=nuevo;
+        end->next=New;
+        New->prev=end;
+        end=New;
     }
     unirNodos();
-    cantidad++;
+    size++;
 }
 
-bool listaMusica::listaVacia(){
-    return ptr==NULL;
+bool listaMusica::isEmpty(){
+    return ini==nullptr;
 }
 
-cancion listaMusica::obtener(int pos){
-    if(!listaVacia()){
-        if(pos<cantidad){
-            nodo *p=ptr;
+song listaMusica::get(int index){
+    if(!isEmpty())
+        return getNode(index)->dato;
+}
+nodo * listaMusica::getNode(int index){
+    if(!isEmpty()){
+        if(index<size){
+            nodo *p=ini;
             int n=0;
             do{
-                if(n==pos){
-                    return p->dato;
+                if(n==index){
+                    return p;
                 }
-                p=p->sig;
+                p=p->next;
                 n++;
-            }while(p!=ptr && n<cantidad);
+            }while(p!=ini);
         }
     }
+    return nullptr;
 }
 
-void listaMusica::eliminarCancion(string nombre){
-    if(!listaVacia()){
-        if(ptr->dato.nombre==nombre){
-            nodo *p=ptr;
-            ult->sig=ptr->sig;
-            ptr->sig->ant=ult;
-            ptr=ptr->sig;
-            delete p;
-            cantidad--;
+void listaMusica::remove(int index){
+    if(!isEmpty() && getNode(index)!=nullptr){
+    	nodo *n=getNode(index);
+        if(ini==end && ini==n){
+            ini=end=nullptr;
+            delete n;
+            return;
         }
-        else{
-            if(ult->dato.nombre==nombre){
-                nodo *p=ult;
-                ult->ant->sig=ptr;
-                ptr->ant=ult->ant;
-                ult=ult->ant;
-                delete p;
-                cantidad--;
-            }
-            else{
-                nodo *p=ptr;
-                do{
-                    if(p->dato.nombre==nombre){
-                        p->ant->sig=p->sig;
-                        p->sig->ant=p->ant;
-                        delete p;
-                        cantidad--;
-                        break;
-                    }
-                    p=p->sig;
-                }while(p!=ptr);
-            }
+	    if(ini==n){
+	        n->next->prev=end;
+	        end->next=n->next;
+            ini=n->next;
+            delete n;
+            return;
         }
+	    if(end==n){
+	        ini->prev=n->prev;
+	        n->prev->next=ini;
+	        end=n->prev;
+		    delete n;
+            return;
+		}
+		else{
+		    n->prev->next=n->next;
+		    n->next->prev=n->prev;
+		    delete n;
+            return;
+		}
     }
 }
 
-cancion listaMusica::siguiente(int id){
-    if(!listaVacia()){
-        nodo *p=ptr;
+void listaMusica::print(){
+    if(!isEmpty()){
+        nodo *p=ini;
+        int x=1;
         do{
-            if(p->dato.id==id)
-                return p->sig->dato;
-            p=p->sig;
-        }while(p!=ptr);
-    }
-}
-
-cancion listaMusica::anterior(int id){
-    if(!listaVacia()){
-        nodo *p=ptr;
-        do{
-            if(p->dato.id==id)
-                return p->ant->dato;
-            p=p->sig;
-        }while(p!=ptr);
-    }
-}
-
-void listaMusica::mostrar(){
-    if(!listaVacia()){
-        nodo *p=ptr;
-        do{
-            p->dato.toString();
-            p=p->sig;
-        }while(p!=ptr);
+            cout<<x<<".";p->dato.toString();
+            x++;
+            p=p->next;
+        }while(p!=ini);
     }
 }

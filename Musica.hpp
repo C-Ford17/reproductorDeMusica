@@ -1,12 +1,15 @@
 #include<iostream>
+#include<ctime>
 using namespace std;
 
-struct cancion{
-    string nombre;
-    string autor;
+struct song{
+    string titulo;
+    string artista;
     string album;
+    time_t update_at;
     int id;
+    bool favorite;
     void toString(){
-        cout<<" nombre: "<<nombre<<" autor: "<<autor<<" album: "<<album<<"\n";
+        cout<<" nombre: "<<titulo<<" autor: "<<artista<<" album: "<<album<<" fecha: "<<update_at<<"<< id: "<<id<<"\n";
     }
 };
